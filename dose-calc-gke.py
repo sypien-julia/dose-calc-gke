@@ -10,7 +10,7 @@ def index():
 
 @app.route('/jobs', methods=['POST'])
 def scheduleJobs():
-    jobsParametersArr = json.JSONDecoder.decode(request.json)
+    jobsParametersArr = json.loads(request.json)
     for parameters in jobsParametersArr:
         if ("oralDose" not in parameters
             or "infDose" not in parameters
@@ -43,7 +43,7 @@ def getJobStatus(jobIds):
         jobId = 0
         status = "running"
         response = app.response_class(
-            response=json.JSONEncoder().encode(
+            response=json.dumps(
                 [
                     {
                         "id": jobId,
@@ -66,7 +66,7 @@ def getJobResults(jobId):
         populationUrl = "populationUrl"
         newDfUrl = "newDfUrl"
         response = app.response_class(
-            response=json.JSONEncoder().encode(
+            response=json.dumps(
                 [
                     {
                         "id": jobId,
