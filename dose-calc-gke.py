@@ -1,7 +1,21 @@
 from flask import Flask, request, abort
 import json
+from google.cloud import container_v1
+
+client = container_v1.ClusterManagerClient()
+
+project_id = 'dose-calc'
+zone = 'us-central1-b'
+cluster = {
+  "name": "dose-calc-cluster",
+  "description": "Cluster for dose-calc-gke app",
+  "initial_node_count": 3
+}
+response = client.create_cluster(project_id, zone, cluster)
+print(response)
 
 app = Flask(__name__)
+
 
 
 @app.route('/')
