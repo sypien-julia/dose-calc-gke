@@ -97,7 +97,5 @@ def getJobResults(jobId):
     else:
         return 'No such jobs', 404
 
-
-
 if __name__ == '__main__':
     app.run()
