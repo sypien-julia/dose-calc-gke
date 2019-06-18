@@ -29,16 +29,16 @@ Point 5 and 6 are must-have!
 
 7. Build image of script and service and push to the Dockerhub (remember to login to dockerhub).  
     
-    `new-server-image-to-dockerhub.sh`  
-    `new-script-image-to-dockerhub.sh`  
+    `r-image/new-image-to-dockerhub.sh`  
+    `server/new-server-image-to-dockerhub.sh`  
   
    are just templates, remember to adjust them to your account. Also as the server image has to be rebuilt (because of the credentials) you need to adjust deployment.yaml file to download from your repository 
     
 4. Create volumes on GKE.
-    `kubectl apply -f ./pvc.yaml`
+    `kubectl apply -f /templates/pvc.yaml`
 
 5. Create deployment with server
-    `kubectl apply -f ./deployment.yaml`
+    `kubectl apply -f /templates/deployment.yaml`
 
 6. Expose port with service for the external traffic
     `kubectl expose deployment flask-deployment --type="NodePort" --port 5000`
