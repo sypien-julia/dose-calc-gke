@@ -15,12 +15,13 @@ spec:
       containers:
       - name: flask
         image: monikeu/r-app-1:r-server
+        imagePullPolicy: Always
         volumeMounts:
-        - name: host-volume
-          mountPath: /mydata
+          - name: dose-volume
+            mountPath: "/mydata"
         ports:
           - containerPort: 5000
       volumes:
-      - name: host-volume
+      - name: dose-volume
         persistentVolumeClaim:
-          claimName: pvc-hostpath
+          claimName: dose-volume-claim

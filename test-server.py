@@ -1,19 +1,4 @@
 from flask import Flask, request, abort, send_file
-# import json
-from google.cloud import container_v1
-import kubernetes.client
-#
-# client = container_v1.ClusterManagerClient()
-#
-# project_id = 'dose-test'
-# zone = 'us-central1-a'
-# cluster = {
-#     "name": "dose-calc-cluster",
-#     "description": "Cluster for dose-calc-gke app",
-#     "initial_node_count": 1
-# }
-# response = client.create_cluster(project_id, zone, cluster)
-# print(response)
 
 app = Flask(__name__)
 
@@ -44,7 +29,7 @@ def index():
 
 @app.route('/download/<jobId>')
 def downloadFile(jobId):
-    path = "/mydata/" + jobId + ".txt"
+    path = "/mydata/" + jobId + ".txt" ### not present in image
     return send_file(path, as_attachment=True)
 
 

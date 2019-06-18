@@ -6,7 +6,7 @@ from kubernetes.client.rest import ApiException
 from kubernetes import client, config
 from pprint import pprint
 
-config.load_kube_config()
+config.load_kube_config("/home/pboszczy/.kube/config")
 configuration = kubernetes.client.Configuration()
 
 api_instance = kubernetes.client.AdmissionregistrationApi()
@@ -20,7 +20,7 @@ api_pods = kubernetes.client.CoreV1Api(
 body = client.V1Job(api_version="batch/v1", kind="Job")
 # Body needs Metadata
 # Attention: Each JOB must have a different name!
-body.metadata = client.V1ObjectMeta(namespace="default", name="r-job-1")
+body.metadata = client.V1ObjectMeta(namespace="default", name="r-job-9")
 # And a Status
 
 body.status = client.V1JobStatus()
@@ -35,11 +35,11 @@ env_list = []
 for x in env_vars:
     env_list.append(client.V1EnvVar(name=x.name, value=x.value))
 
-volume_mounts = client.V1VolumeMount(mount_path="/mydata", name="host-volume")
+volume_mounts = client.V1VolumeMount(mount_path="/mydata", name="dose-volume")
 container = client.V1Container(name="r-container", image="monikeu/r-script-1:r-image-env",
-                               env=env_list, volume_mounts=[volume_mounts])
-per_vol_claim = client.V1PersistentVolumeClaimVolumeSource(claim_name="pvc-hostpath")
-volume = client.V1Volume(name="host-volume", persistent_volume_claim=per_vol_claim)
+                               env=env_list, volume_mounts=[volume_mounts], image_pull_policy="Always")
+per_vol_claim = client.V1PersistentVolumeClaimVolumeSource(claim_name="dose-volume-claim")
+volume = client.V1Volume(name="dose-volume", persistent_volume_claim=per_vol_claim)
 template.template.spec = client.V1PodSpec(containers=[container],
                                           restart_policy='Never',
                                           volumes=[volume])

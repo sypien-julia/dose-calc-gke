@@ -13,6 +13,8 @@ gcloud container clusters create my-cluster \
     --scopes cloud-platform \
     --num-nodes 1
 
+    SET API CREDENTILS  https://cloud.google.com/docs/authentication/getting-started
+
 gcloud container clusters get-credentials my-cluster --zone us-central1-a
 
 4. build image of script and service and push to the dockerhub (remember to login to dockerhub and apply corresponding credentials)
@@ -29,6 +31,7 @@ gcloud container clusters get-credentials my-cluster --zone us-central1-a
 Check if server id running
     curl http:\\NODEIP:PORTNUM
     NODEIP=$(kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="ExternalIP")].address }')
+    (addres of minikube in case of local)
 
 
 8. Delete cluster
