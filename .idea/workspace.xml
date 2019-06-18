@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0c7c102-dccf-43aa-812c-3b1161077a21" name="Default" comment="Some updates">
+    <list default="true" id="f0c7c102-dccf-43aa-812c-3b1161077a21" name="Default" comment="Update, final i think">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluster-setings/pvc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pvc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/templates/deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job-to-gke.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +27,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/dose-calc-gke.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
+            <state relative-caret-position="2271">
               <caret line="189" column="36" selection-start-line="189" selection-start-column="36" selection-end-line="189" selection-end-column="36" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="322">
+                <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/r-image/new-image-to-dockerhub.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -47,34 +67,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/job-to-gke.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="17" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/pvc.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/readme.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="285">
-                <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -94,15 +90,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib64/python3.6/site-packages/flask/app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="1817" selection-start-line="1817" selection-end-line="1817" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -114,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/deployment.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="240">
+              <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -157,6 +144,7 @@
         <option value="$PROJECT_DIR$/server/dose-calc-gke.py" />
         <option value="$PROJECT_DIR$/instructions.txt" />
         <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -358,16 +346,24 @@
       <option name="project" value="LOCAL" />
       <updated>1560894969030</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update, final i think">
+      <created>1560895675366</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1560895675366</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7427000" />
+    <option name="totallyTimeSpent" value="8925000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30982906" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30982906" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -377,9 +373,9 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.3290735" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007587" side_tool="true" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.7245827" visible="true" weight="0.37486687" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.7245827" weight="0.37486687" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -389,7 +385,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Probably final" />
-    <option name="LAST_COMMIT_MESSAGE" value="Probably final" />
+    <MESSAGE value="Update, final i think" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update, final i think" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -498,9 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/r-image/new-image-to-dockerhub.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/r-image/R_dialog_testowy.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -550,23 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/dose-calc-gke.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="189" column="36" selection-start-line="189" selection-start-column="36" selection-end-line="189" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/deployment.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/new-server-image-to-dockerhub.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -594,11 +571,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/dose-calc-gke.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2271">
+          <caret line="189" column="36" selection-start-line="189" selection-start-column="36" selection-end-line="189" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="285">
-            <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <first_editor relative-caret-position="360">
+            <caret line="24" column="55" selection-end-line="48" />
           </first_editor>
           <second_editor />
         </state>
@@ -606,6 +593,30 @@
       <provider editor-type-id="text-editor">
         <state>
           <caret column="45" lean-forward="true" selection-start-column="45" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/deployment.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/r-image/new-image-to-dockerhub.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="322">
+            <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
