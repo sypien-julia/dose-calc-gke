@@ -37,7 +37,6 @@ shape_F <- 1.9 #shape parameter for females' age distribution
 
 a <- c(0.2434986, 1.3321865) #Olek 16.02.2018
 
-
 #Functions to transform normal distribution into log-normal
 #Functions of mean and CV:
 #meanlog:

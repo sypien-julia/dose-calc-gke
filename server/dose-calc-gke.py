@@ -1,6 +1,7 @@
 from pprint import pprint
 
-from flask import Flask, request, abort
+import kubernetes
+from flask import Flask, request, abort, send_file
 import json
 from google.cloud import container_v1
 from kubernetes import client as kubeClient
@@ -15,17 +16,22 @@ gkeClient = container_v1.ClusterManagerClient()
 project_id = 'dose-calc'
 zone = 'us-central1-b'
 cluster = {
-  "name": "dose-calc-cluster",
-  "description": "Cluster for dose-calc-gke app",
-  "initial_node_count": 3
+    "name": "dose-calc-cluster",
+    "description": "Cluster for dose-calc-gke app",
+    "initial_node_count": 3
 }
 # response = gkeClient.create_cluster(project_id, zone, cluster)
 # exec("gcloud container clusters get-credentials dose-calc-cluster3") not working :(
 
-config.load_kube_config()
+config.load_kube_config("./kubeconfig")
 configuration = kubeClient.Configuration()
 
-api_instance = kubeClient.AdmissionregistrationApi()
+# api_instance = kubeClient.AdmissionregistrationApi()
+
+api_instance = kubernetes.client.BatchV1Api(
+    kubernetes.client.ApiClient(configuration))
+api_pods = kubernetes.client.CoreV1Api(
+    kubernetes.client.ApiClient(configuration))
 
 api_instance = kubeClient.BatchV1Api(
     kubeClient.ApiClient(configuration))
@@ -34,14 +40,16 @@ api_pods = kubeClient.CoreV1Api(
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return 'Dose calculator'
 
+
 @app.route('/jobs', methods=['POST'])
 def scheduleJobs():
     jobNames = []
-    for jobParameters in request.json:
+    for jobParameters in request.get_json(force=True):
         if not validateJobParameters(jobParameters):
             return abort(422,
                          'Invalid arguments')
@@ -61,11 +69,11 @@ def scheduleJobs():
 
         env_list = createJobEnv(jobParameters, jobName)
 
-        volume_mounts = kubeClient.V1VolumeMount(mount_path="/mydata", name="host-volume")
+        volume_mounts = kubeClient.V1VolumeMount(mount_path="/mydata", name="dose-volume")
         container = kubeClient.V1Container(name="r-container", image="monikeu/r-script-1:r-image-env",
-                                           env=env_list, volume_mounts=[volume_mounts])
-        per_vol_claim = kubeClient.V1PersistentVolumeClaimVolumeSource(claim_name="pvc-hostpath")
-        volume = kubeClient.V1Volume(name="host-volume", persistent_volume_claim=per_vol_claim)
+                                           env=env_list, volume_mounts=[volume_mounts], image_pull_policy="Always")
+        per_vol_claim = kubeClient.V1PersistentVolumeClaimVolumeSource(claim_name="dose-volume-claim")
+        volume = kubeClient.V1Volume(name="dose-volume", persistent_volume_claim=per_vol_claim)
         template.template.spec = kubeClient.V1PodSpec(containers=[container],
                                                       restart_policy='Never',
                                                       volumes=[volume])
@@ -82,17 +90,18 @@ def scheduleJobs():
 
     return 'Created one or more jobs: {}'.format(",".join(jobNames)), 201
 
+
 def validateJobParameters(jobParameters):
     if ("oralDose" not in jobParameters
-        or "infDose" not in jobParameters
-        or "infTime" not in jobParameters
-        or "individualCount" not in jobParameters
-        or "femaleCount" not in jobParameters
-        or "minAge" not in jobParameters
-        or "maxAge" not in jobParameters
-        or "tEnd" not in jobParameters
-        or "seed" not in jobParameters):
-            return False
+            or "infDose" not in jobParameters
+            or "infTime" not in jobParameters
+            or "individualCount" not in jobParameters
+            or "femaleCount" not in jobParameters
+            or "minAge" not in jobParameters
+            or "maxAge" not in jobParameters
+            or "tEnd" not in jobParameters
+            or "seed" not in jobParameters):
+        return False
     return True
 
 
@@ -112,7 +121,6 @@ def createJobEnv(jobParameters, jobName):
     for x in env_vars:
         env_list.append(kubeClient.V1EnvVar(name=x.name, value=x.value))
     return env_list
-
 
 
 @app.route('/jobs/<string:jobId>', methods=['DELETE'])
@@ -170,6 +178,13 @@ def getJobResults(jobId):
         return response
     else:
         return 'No such jobs', 404
+
+
+@app.route('/download/<jobId>')
+def downloadFile(jobId):
+    path = "/mydata/" + jobId + ".txt"
+    return send_file(path, as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

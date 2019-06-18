@@ -13,7 +13,8 @@ gcloud container clusters create my-cluster \
     --scopes cloud-platform \
     --num-nodes 1
 
-    SET API CREDENTILS  https://cloud.google.com/docs/authentication/getting-started
+!!!SET API CREDENTILS  https://cloud.google.com/docs/authentication/getting-started on a image???
+!!! copy ~/.kube/conf (only on linux, no idea where on windows) to server directory
 
 gcloud container clusters get-credentials my-cluster --zone us-central1-a
 

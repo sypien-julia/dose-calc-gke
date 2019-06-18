@@ -20,7 +20,7 @@ api_pods = kubernetes.client.CoreV1Api(
 body = client.V1Job(api_version="batch/v1", kind="Job")
 # Body needs Metadata
 # Attention: Each JOB must have a different name!
-body.metadata = client.V1ObjectMeta(namespace="default", name="r-job-9")
+body.metadata = client.V1ObjectMeta(namespace="default", name="r-job-10")
 # And a Status
 
 body.status = client.V1JobStatus()
