@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from flask import Flask, request, abort
 import json
 from google.cloud import container_v1
@@ -5,6 +7,8 @@ from kubernetes import client as kubeClient
 from kubernetes import config
 from kubernetes.client import V1EnvVar
 import uuid
+
+from kubernetes.client.rest import ApiException
 
 gkeClient = container_v1.ClusterManagerClient()
 
@@ -28,13 +32,6 @@ api_instance = kubeClient.BatchV1Api(
 api_pods = kubeClient.CoreV1Api(
     kubeClient.ApiClient(configuration))
 
-
-# v1 = kubeClient.CoreV1Api()
-# print("Listing pods with their IPs:")
-# ret = v1.list_pod_for_all_namespaces(watch=False)
-# for i in ret.items:
-#     print("%s\t%s\t%s" % (i.status.pod_ip, i.metadata.namespace, i.metadata.name))
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -43,6 +40,7 @@ def index():
 
 @app.route('/jobs', methods=['POST'])
 def scheduleJobs():
+    jobNames = []
     for jobParameters in request.json:
         if not validateJobParameters(jobParameters):
             return abort(422,
@@ -75,11 +73,14 @@ def scheduleJobs():
         body.spec = kubeClient.V1JobSpec(ttl_seconds_after_finished=600,
                                          template=template.template)
 
-        response = api_instance.create_namespaced_job("default", body, pretty=True)
+        try:
+            response = api_instance.create_namespaced_job("default", body, pretty=True)
+            pprint(response)
+            jobNames.append(jobName)
+        except ApiException as e:
+            return "Error occurred during an attempt to create a job", e.status
 
-        print(response)
-
-    return 'Created one or more jobs', 201
+    return 'Created one or more jobs: {}'.format(",".join(jobNames)), 201
 
 def validateJobParameters(jobParameters):
     if ("oralDose" not in jobParameters
@@ -114,14 +115,14 @@ def createJobEnv(jobParameters, jobName):
 
 
 
-@app.route('/jobs/<int:jobId>', methods=['DELETE'])
+@app.route('/jobs/<string:jobId>', methods=['DELETE'])
 def deleteJob(jobId):
-    if True:
-        return 'Job cancelled', 200
-    elif True:
-        return 'No such job', 404
-    else:
-        return 'Job is not running', 405
+    try:
+        api_response = api_instance.delete_namespaced_job(jobId, "default", pretty=True)
+        pprint(api_response)
+        return 'Job deleted', 200
+    except ApiException as e:
+        return "Error occurred during an attempt to delete job {}".format(jobId), e.status
 
 
 @app.route('/jobs/<int:jobIds>/status', methods=['GET'])
