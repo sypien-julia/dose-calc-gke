@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: monikeu/r-app-1:r-server
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: dose-volume
+            mountPath: "/mydata"
+        ports:
+          - containerPort: 5000
+      volumes:
+      - name: dose-volume
+        persistentVolumeClaim:
+          claimName: dose-volume-claim
