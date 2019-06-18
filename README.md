@@ -19,7 +19,8 @@ Download package from https://cloud.google.com/sdk/docs/
     
 Example zone: us-central1-a, more on https://cloud.google.com/compute/docs/regions-zones/
 
-// todo czy to trzeba Execute gcloud container clusters get-credentials CLUSTER --zone ZONE
+Execute:  
+`gcloud container clusters get-credentials CLUSTER --zone ZONE`
 
 5. Download API key from    
 https://cloud.google.com/docs/authentication/getting-started and place it in `server/credentials.json`,   it will be needed for the image,
