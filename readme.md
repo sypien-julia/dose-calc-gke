@@ -1,17 +1,23 @@
-1. Install google cloud sdk and authorise
-https://cloud.google.com/sdk/docs/
+DOSE CALC service - integrated into GKE
 
-2. Enable GCP api
+Prerequsites:
+
+1. Install google cloud sdk for you OS and login
+Download package from https://cloud.google.com/sdk/docs/
+
+2. Enable GCP API
 gcloud services enable container.googleapis.com compute.googleapis.com containerregistry.googleapis.com cloudbuild.googleapis.com
 
-4. Install kubectl
+3. Install kubectl
 
 3. Create cluster
-gcloud container clusters create my-cluster \
+gcloud container clusters create CLUSTER_NAME \
     --preemptible \
-    --zone us-central1-a \
+    --zone  ZONE\
     --scopes cloud-platform \
     --num-nodes 1
+
+Example zone: us-central1-a, more on
 
 !!!SET API CREDENTILS  https://cloud.google.com/docs/authentication/getting-started on a image???
 !!! copy ~/.kube/conf (only on linux, no idea where on windows) to server directory
