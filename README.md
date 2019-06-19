@@ -58,3 +58,57 @@ Horray! The server is working!
 If you want to delete cluster run   
  `gcloud container clusters delete CLUSTER_NAME`
 
+
+ #Working with the app#
+
+You can use the app to:
+
+
+1. Initialize calculations
+
+url: `/jobs`
+method: `POST`
+request body: json array containing dictionaries with calculation parameters, one dictionary for one calculation
+
+Example:
+```json
+[
+  {
+    "oralDose": "3",
+    "infDose": "2",
+    "infTime": "3",
+    "individualCount": "10",
+    "femaleCount": "3",
+    "minAge": "3",
+    "maxAge": "90",
+    "tEnd": "0",
+    "seed": "0"
+  }
+]
+```
+
+returns: 201 code and a message with created jobs' ids list on success, error code on failure
+
+
+2. Delete calculation
+
+url: `/jobs/<string:jobId>`
+method: `DELETE`
+parameter: returned by /jobs method id of the job due to be deleted
+returns: 201 code on success, error code on failure
+
+
+3. Get calculations statusses
+
+url: `/jobs/<path:jobIds>/status`
+method: `GET`
+parameter: returned by /jobs method ids of the jobs, separated with "/" mark
+returns: 200 code and a json formatted list of job statusses on success, error code on failure
+
+
+4. Get calculation results
+
+url: `/download/<jobId>`
+method: `GET`
+parameter: returned by /jobs method id of the job which results we want do download
+returns: attachment files with the results
