@@ -24,7 +24,7 @@ Execute:
 
 5. Download API key from    
 https://cloud.google.com/docs/authentication/getting-started and place it in `server/credentials.json`,   it will be needed for the image,
-6. Copy contents of `~/.kube/conf` (only on linux) file to server directory to `/server/kubeconfig`. Also needed for the image.
+6. Copy contents of `~/.kube/conf` file to server directory to `/server/kubeconfig`. Also needed for the image.
 Point 5 and 6 are must-have!
 
 7. Build image of script and service and push to the Dockerhub (remember to login to dockerhub).  
@@ -59,16 +59,16 @@ If you want to delete cluster run
  `gcloud container clusters delete CLUSTER_NAME`
 
 
- #Working with the app#
+# Working with the app #
 
 You can use the app to:
 
 
-1. Initialize calculations
+1. Initialize your calculations
 
 url: `/jobs`
 method: `POST`
-request body: json array containing dictionaries with calculation parameters, one dictionary for one calculation
+request body: json array containing dictionaries with calculations parameters, one dictionary for one calculation
 
 Example:
 ```json
@@ -87,14 +87,14 @@ Example:
 ]
 ```
 
-returns: 201 code and a message with created jobs' ids list on success, error code on failure
+returns: 201 code and a message with created jobs' ids on success, error code on failure
 
 
 2. Delete calculation
 
 url: `/jobs/<string:jobId>`
 method: `DELETE`
-parameter: returned by /jobs method id of the job due to be deleted
+parameter: returned by /jobs method id of the job to be deleted
 returns: 201 code on success, error code on failure
 
 
@@ -103,12 +103,12 @@ returns: 201 code on success, error code on failure
 url: `/jobs/<path:jobIds>/status`
 method: `GET`
 parameter: returned by /jobs method ids of the jobs, separated with "/" mark
-returns: 200 code and a json formatted list of job statusses on success, error code on failure
+returns: 200 code and a json with job statusses on success, error code on failure
 
 
 4. Get calculation results
 
 url: `/download/<jobId>`
 method: `GET`
-parameter: returned by /jobs method id of the job which results we want do download
-returns: attachment files with the results
+parameter: returned by /jobs method id of the job the results of which you want do download
+returns: files with the results
