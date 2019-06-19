@@ -133,51 +133,41 @@ def deleteJob(jobId):
         return "Error occurred during an attempt to delete job {}".format(jobId), e.status
 
 
-@app.route('/jobs/<int:jobIds>/status', methods=['GET'])
+@app.route('/jobs/<path:jobIds>/status', methods=['GET'])
 def getJobStatus(jobIds):
-    if True:
-        jobId = 0
-        status = "running"
-        response = app.response_class(
-            response=json.dumps(
-                [
-                    {
-                        "id": jobId,
-                        "status": status
-                    }
-                ]
-            ),
-            status=200,
-            mimetype='application/json'
-        )
-        return response
-    else:
-        return 'No such jobs', 404
+    jobIdsArr = jobIds.split('/')
+    results = []
+    for jobId in jobIdsArr:
+        try:
+            api_response = api_instance.read_namespaced_job_status(jobId, "default", pretty=True)
+            pprint(api_response)
+
+            results.append(
+                {
+                    "jobId": jobId,
+                    "status": resolveJobStatus(api_response)
+                }
+            )
+
+        except ApiException as e:
+            return "Could not read job {} status".format(jobId), e.status
+
+    return app.response_class(
+        response=json.dumps(results),
+        status=200,
+        mimetype='application/json'
+    )
 
 
-@app.route('/jobs/<int:jobIds>/results', methods=['GET'])
-def getJobResults(jobId):
-    if True:
-        jobId = 0
-        populationUrl = "populationUrl"
-        newDfUrl = "newDfUrl"
-        response = app.response_class(
-            response=json.dumps(
-                [
-                    {
-                        "id": jobId,
-                        "errorOccurred": False,
-                        "population": populationUrl,
-                        "newDf": newDfUrl,
-                    }
-                ]
-            ),
-            status=200,
-            mimetype='application/json'
-        )
-        return response
+def resolveJobStatus(api_response):
+    if api_response._status.succeeded is not None:
+        jobStatus = "Succeeded"
+    elif api_response._status.active is not None:
+        jobStatus = "Running"
     else:
-        return 'No such jobs', 404
+        jobStatus = "Failed"
+
+    return jobStatus
 
 
 @app.route('/download/<jobId>')
