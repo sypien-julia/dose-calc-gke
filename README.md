@@ -68,9 +68,7 @@ You can use the app to:
 
 * url: `/jobs`
 * method: `POST`
-* request body: json array containing dictionaries with calculations parameters, one dictionary for one calculation
-
-Example:
+* request body: json array containing dictionaries with calculations parameters, one dictionary for one calculation, for example:
 ```json
 [
   {
@@ -94,15 +92,15 @@ Example:
 
 * url: `/jobs/<string:jobId>`
 * method: `DELETE`
-* parameter: returned by /jobs method id of the job to be deleted
+* parameter: returned by /jobs id of the job to be deleted
 * returns: 201 code on success, error code on failure
 
 
-3. Get calculations statusses
+3. Get calculations statuses
 
 * url: `/jobs/<path:jobIds>/status`
 * method: `GET`
-* parameter: returned by /jobs method ids of the jobs, separated with "/" mark
+* parameter: returned by /jobs ids of the jobs the statuses of which you want to check, separated with "/" mark
 * returns: 200 code and a json with job statusses on success, error code on failure
 
 
@@ -110,5 +108,5 @@ Example:
 
 * url: `/download/<jobId>`
 * method: `GET`
-* parameter: returned by /jobs method id of the job the results of which you want do download
+* parameter: returned by /jobs id of the job the results of which you want do download
 * returns: files with the results
